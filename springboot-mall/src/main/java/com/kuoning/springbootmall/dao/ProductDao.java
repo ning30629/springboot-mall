@@ -1,5 +1,6 @@
 package com.kuoning.springbootmall.dao;
 
+import com.kuoning.springbootmall.constant.ProductCategory;
 import com.kuoning.springbootmall.dto.ProductRequest;
 import com.kuoning.springbootmall.model.Product;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 public interface ProductDao {
 
-    List<Product> getProducts();
+    List<Product> getProducts(ProductCategory category, String search);
 
     Product getProductById(Integer productId);
 

@@ -1,5 +1,6 @@
 package com.kuoning.springbootmall.service.impl;
 
+import com.kuoning.springbootmall.constant.ProductCategory;
 import com.kuoning.springbootmall.dao.ProductDao;
 import com.kuoning.springbootmall.dto.ProductRequest;
 import com.kuoning.springbootmall.model.Product;
@@ -16,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts() {
-        return productDao.getProducts();
+    public List<Product> getProducts(ProductCategory category, String search) {
+        return productDao.getProducts(category, search);
     }
 
     @Override
