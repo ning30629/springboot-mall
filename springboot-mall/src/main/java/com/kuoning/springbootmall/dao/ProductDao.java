@@ -1,5 +1,6 @@
 package com.kuoning.springbootmall.dao;
 
+import com.kuoning.springbootmall.dto.ProductQueryParams;
 import com.kuoning.springbootmall.dto.ProductRequest;
 import com.kuoning.springbootmall.model.Product;
 

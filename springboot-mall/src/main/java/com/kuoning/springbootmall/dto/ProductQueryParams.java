@@ -1,4 +1,4 @@
-package com.kuoning.springbootmall.dao;
+package com.kuoning.springbootmall.dto;
 
 import com.kuoning.springbootmall.constant.ProductCategory;
 

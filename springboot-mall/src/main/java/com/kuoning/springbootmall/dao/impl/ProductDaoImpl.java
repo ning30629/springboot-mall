@@ -1,7 +1,7 @@
 package com.kuoning.springbootmall.dao.impl;
 
 import com.kuoning.springbootmall.dao.ProductDao;
-import com.kuoning.springbootmall.dao.ProductQueryParams;
+import com.kuoning.springbootmall.dto.ProductQueryParams;
 import com.kuoning.springbootmall.dto.ProductRequest;
 import com.kuoning.springbootmall.model.Product;
 import com.kuoning.springbootmall.rowmapper.ProductRowMapper;
