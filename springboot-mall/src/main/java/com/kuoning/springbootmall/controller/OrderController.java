@@ -38,13 +38,13 @@ public class OrderController {
         List<Order> orderList = orderService.getOrders(orderQueryParams);
 
         //取得 order總數
-        Integer count = orderService.countOrder(orderQueryParams);
+        Integer total = orderService.countOrder(orderQueryParams);
 
         //分頁
         Page<Order> page = new Page<>();
         page.setLimit(limit);
         page.setOffset(offset);
-        page.setTotal(count);
+        page.setTotal(total);
         page.setResults(orderList);
 
         return ResponseEntity.status(HttpStatus.OK).body(page);

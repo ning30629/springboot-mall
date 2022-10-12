@@ -9,7 +9,6 @@ public class Order {
     private Integer totalAmount;
     private Date createdDate;
     private Date lastModifiedDate;
-
     private List<OrderItem> orderItemList;
 
     public Integer getOrderId() {
