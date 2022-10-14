@@ -1,9 +1,11 @@
 package com.kuoning.springbootmall.dao.impl;
 
+import com.kuoning.springbootmall.constant.ProductCategory;
 import com.kuoning.springbootmall.dao.ProductDao;
 import com.kuoning.springbootmall.dto.ProductQueryParams;
 import com.kuoning.springbootmall.dto.ProductRequest;
 import com.kuoning.springbootmall.model.Product;
+import com.kuoning.springbootmall.rowmapper.GetProductCategoryRowMapper;
 import com.kuoning.springbootmall.rowmapper.ProductRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -75,6 +77,18 @@ public class ProductDaoImpl implements ProductDao {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public String getProductCategory(Integer productId) {
+        String sql = "SELECT product_id, category FROM product WHERE product_id = :productId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("productId", productId);
+
+        String buyProductCategory = namedParameterJdbcTemplate.query(sql, map, new GetProductCategoryRowMapper()).toString();
+
+        return buyProductCategory;
     }
 
     @Override
