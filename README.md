@@ -1,4 +1,4 @@
-# springboot-mall 專案介紹
+# Spring Boot - mall 專案介紹
 使用Spring Boot製作的電商網站後端，包括以下功能
 * 商品功能
   1. 新增商品
