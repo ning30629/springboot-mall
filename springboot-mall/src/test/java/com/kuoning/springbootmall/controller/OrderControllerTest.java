@@ -120,8 +120,8 @@ public class OrderControllerTest {
         buyItemList.add(buyItem1);
 
         BuyItem buyItem2 = new BuyItem();
-        buyItem2.setProductId(2);
-        buyItem2.setQuantity(3);
+        buyItem2.setProductId(7);
+        buyItem2.setQuantity(1);
         buyItemList.add(buyItem2);
 
         createOrderRequest.setBuyItemList(buyItemList);
@@ -137,7 +137,7 @@ public class OrderControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.orderId", notNullValue()))
                 .andExpect(jsonPath("$.userId", equalTo(1)))
-                .andExpect(jsonPath("$.totalAmount", equalTo(1050)))
+                .andExpect(jsonPath("$.totalAmount", equalTo(405135)))
                 .andExpect(jsonPath("$.createdDate", notNullValue()))
                 .andExpect(jsonPath("$.lastModifiedDate", notNullValue()))
                 .andExpect(jsonPath("$.orderItemList", hasSize(2)));
