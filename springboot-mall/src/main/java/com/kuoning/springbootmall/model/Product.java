@@ -2,9 +2,10 @@ package com.kuoning.springbootmall.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kuoning.springbootmall.constant.ProductCategory;
+import io.swagger.annotations.ApiModel;
 
 import java.util.Date;
-
+@ApiModel("商品")
 public class Product {
 
     private Integer productId;

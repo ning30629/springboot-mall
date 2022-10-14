@@ -6,6 +6,8 @@ import com.kuoning.springbootmall.dto.ProductRequest;
 import com.kuoning.springbootmall.model.Product;
 import com.kuoning.springbootmall.service.ProductService;
 import com.kuoning.springbootmall.util.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.List;
 
+@Api(tags = "商品controller層")
 @Validated
 @RestController
 public class ProductController {
@@ -24,6 +27,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @ApiOperation("取得商品列表")
     @GetMapping("/products")
     public ResponseEntity<Page<Product>> getProducts(
             //查詢條件Filtering
@@ -62,6 +66,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(page);
     }
 
+    @ApiOperation("取得指定productId的商品")
     @GetMapping("/products/{productId}")
     public ResponseEntity<Product> getProduct(@PathVariable Integer productId){
         Product product = productService.getProductById(productId);
@@ -73,6 +78,7 @@ public class ProductController {
         }
     }
 
+    @ApiOperation("創建商品")
     @PostMapping("/products")
     public ResponseEntity<Product> createProduct(@RequestBody @Valid ProductRequest productRequest) {
         Integer productId = productService.createProduct(productRequest);
@@ -82,6 +88,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(product);
     }
 
+    @ApiOperation("更新商品")
     @PutMapping("/products/{productId}")
     public ResponseEntity<Product> updateProduct(@PathVariable Integer productId,
                                                  @RequestBody @Valid ProductRequest productRequest){
@@ -102,6 +109,7 @@ public class ProductController {
 
     }
 
+    @ApiOperation("刪除商品")
     @DeleteMapping("/products/{productId}")
     public ResponseEntity<?> deleteProduct(@PathVariable Integer productId) {
         productService.deleteProductById(productId);

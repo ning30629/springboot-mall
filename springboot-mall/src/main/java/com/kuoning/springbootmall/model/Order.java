@@ -1,8 +1,11 @@
 package com.kuoning.springbootmall.model;
 
+import io.swagger.annotations.ApiModel;
+
 import java.util.Date;
 import java.util.List;
 
+@ApiModel("訂單")
 public class Order {
     private Integer orderId;
     private Integer userId;
