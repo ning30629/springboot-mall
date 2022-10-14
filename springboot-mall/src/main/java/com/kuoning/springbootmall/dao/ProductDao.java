@@ -1,5 +1,6 @@
 package com.kuoning.springbootmall.dao;
 
+import com.kuoning.springbootmall.constant.ProductCategory;
 import com.kuoning.springbootmall.dto.ProductQueryParams;
 import com.kuoning.springbootmall.dto.ProductRequest;
 import com.kuoning.springbootmall.model.Product;
@@ -14,7 +15,10 @@ public interface ProductDao {
 
     Product getProductById(Integer productId);
 
+    String getProductCategory(Integer productId);
+
     Integer createProduct(ProductRequest productRequest);
+
 
     void updateProduct(Integer productId, ProductRequest productRequest);
 

@@ -14,7 +14,7 @@ public interface OrderDao {
     Order getOrderById(Integer orderId);
 
     List<OrderItem> getOrderItemsById(Integer orderId);
-    Integer createOrder(Integer userId, int totalAmount);
+    Integer createOrder(Integer userId, double totalAmount);
 
     void createOrderItems(Integer orderId, List<OrderItem> orderItemList);
 }

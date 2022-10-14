@@ -93,7 +93,7 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     @Override
-    public Integer createOrder(Integer userId, int totalAmount) {
+    public Integer createOrder(Integer userId, double totalAmount) {
         String sql = "INSERT INTO `order`(user_id, total_amount, created_date, last_modified_date) " +
                 "VALUES (:userId, :totalAmount, :createdDate, :lastModifiedDate)";
 

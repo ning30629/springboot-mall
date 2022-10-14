@@ -21,6 +21,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class OrderServiceImpl implements OrderService {
@@ -75,7 +76,8 @@ public class OrderServiceImpl implements OrderService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
-        int totalAmount = 0;
+        double totalAmount = 0;
+        List<String> countCategory = new ArrayList<>();
         List<OrderItem> orderItemList = new ArrayList<>();
 
         for (BuyItem buyItem : createOrderRequest.getBuyItemList()) {
@@ -94,7 +96,11 @@ public class OrderServiceImpl implements OrderService {
             //扣除商品庫存
             productDao.updateStock(product.getProductId(), product.getStock()-buyItem.getQuantity());
 
-            //計算總價錢
+            //取出購買商品的種類
+            String buyProductCategory = productDao.getProductCategory(buyItem.getProductId());
+            countCategory.add(buyProductCategory);
+
+            //計算總價錢(原價)
             int amount = buyItem.getQuantity() * product.getPrice();
             totalAmount += amount;
 
@@ -106,7 +112,20 @@ public class OrderServiceImpl implements OrderService {
 
             orderItemList.add(orderItem);
         }
+        //檢查總共購買了幾類商品
+        List<String> totalCategory = countCategory.stream().distinct().collect(Collectors.toList());
+        double discount = 0;
 
+        //計算折扣後的價錢 (購買三個種類商品打8折，兩個種類商品打9折，單一種類不打折)
+        if (totalCategory.size()==3 ){
+            discount = 0.8;
+        } else if (totalCategory.size()==2) {
+            discount = 0.9;
+        } else {
+            discount = 1;
+        }
+
+        totalAmount = totalAmount * discount;
         //創建訂單
         Integer orderId = orderDao.createOrder(userId, totalAmount);
 
