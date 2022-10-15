@@ -113,7 +113,13 @@ public class OrderServiceImpl implements OrderService {
             orderItemList.add(orderItem);
         }
         //檢查總共購買了幾類商品
-        List<String> totalCategory = countCategory.stream().distinct().collect(Collectors.toList());
+        //List<String> totalCategory = countCategory.stream().distinct().collect(Collectors.toList());
+        List<String> totalCategory = new ArrayList();
+        for (int i = 0; i < countCategory.size(); i++) {
+            if (!totalCategory.contains(countCategory.get(i))) {
+                totalCategory.add(countCategory.get(i));
+            }
+        }
         double discount = 0;
 
         //計算折扣後的價錢 (購買三個種類商品打8折，兩個種類商品打9折，單一種類不打折)

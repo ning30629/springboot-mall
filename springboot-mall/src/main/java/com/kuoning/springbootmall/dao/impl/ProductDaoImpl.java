@@ -81,7 +81,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public String getProductCategory(Integer productId) {
-        String sql = "SELECT product_id, category FROM product WHERE product_id = :productId";
+        String sql = "SELECT category FROM product WHERE product_id = :productId";
 
         Map<String, Object> map = new HashMap<>();
         map.put("productId", productId);
