@@ -1,6 +1,5 @@
 package com.kuoning.springbootmall.dao.impl;
 
-import com.kuoning.springbootmall.constant.ProductCategory;
 import com.kuoning.springbootmall.dao.ProductDao;
 import com.kuoning.springbootmall.dto.ProductQueryParams;
 import com.kuoning.springbootmall.dto.ProductRequest;
@@ -81,7 +80,7 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public String getProductCategory(Integer productId) {
-        String sql = "SELECT product_id, category FROM product WHERE product_id = :productId";
+        String sql = "SELECT category FROM product WHERE product_id = :productId";
 
         Map<String, Object> map = new HashMap<>();
         map.put("productId", productId);
