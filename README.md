@@ -25,6 +25,8 @@
 |SDK | 17 |
 |Spring Boot | 2.7.4|
 |MySQL| 8.0.30 |
+|Swagger 2 | 2.9.2 |
+|Swagger UI | 2.9.2 |
 
 
 
