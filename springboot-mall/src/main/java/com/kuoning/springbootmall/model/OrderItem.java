@@ -1,5 +1,8 @@
 package com.kuoning.springbootmall.model;
 
+import io.swagger.annotations.ApiModel;
+
+@ApiModel("訂單詳細資訊")
 public class OrderItem {
 
     private Integer orderItemId;

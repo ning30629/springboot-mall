@@ -5,6 +5,9 @@ import com.kuoning.springbootmall.dto.OrderQueryParams;
 import com.kuoning.springbootmall.model.Order;
 import com.kuoning.springbootmall.service.OrderService;
 import com.kuoning.springbootmall.util.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +19,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.util.List;
 
+@Api(tags = "訂單controller層")
 @Validated
 @RestController
 public class OrderController {
@@ -23,6 +27,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @ApiOperation("根據useId查詢訂單")
     @GetMapping("/users/{userId}/orders")
     public ResponseEntity<Page<Order>> getOrders(
             @PathVariable Integer userId,
@@ -50,6 +55,7 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.OK).body(page);
     }
 
+    @ApiOperation("根據useId創建訂單")
     @PostMapping("/users/{userId}/orders")
     public ResponseEntity<?> createOrder(@PathVariable Integer userId,
                                          @RequestBody @Valid CreateOrderRequest createOrderRequest) {

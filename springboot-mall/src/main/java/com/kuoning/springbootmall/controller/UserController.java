@@ -4,6 +4,8 @@ import com.kuoning.springbootmall.dto.UserLoginRequest;
 import com.kuoning.springbootmall.dto.UserRegisterRequest;
 import com.kuoning.springbootmall.model.User;
 import com.kuoning.springbootmall.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
+@Api(tags = "使用者controller層")
 @RestController
 public class UserController {
 
@@ -21,6 +24,7 @@ public class UserController {
     private UserService userService;
 
 
+    @ApiOperation("使用者註冊")
     @PostMapping("/users/register")
     public ResponseEntity<User> register(@RequestBody @Valid UserRegisterRequest userRegisterRequest) {
         Integer userId = userService.register(userRegisterRequest);
@@ -30,6 +34,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
+    @ApiOperation("使用者登入")
     @PostMapping("/users/login")
     public ResponseEntity<User> login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
         User user = userService.login(userLoginRequest);
