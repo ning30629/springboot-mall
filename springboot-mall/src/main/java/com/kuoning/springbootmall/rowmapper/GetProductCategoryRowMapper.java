@@ -1,7 +1,5 @@
 package com.kuoning.springbootmall.rowmapper;
 
-import com.kuoning.springbootmall.constant.ProductCategory;
-import com.kuoning.springbootmall.model.Product;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

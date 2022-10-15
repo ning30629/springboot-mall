@@ -21,7 +21,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class OrderServiceImpl implements OrderService {
@@ -113,7 +112,6 @@ public class OrderServiceImpl implements OrderService {
             orderItemList.add(orderItem);
         }
         //檢查總共購買了幾類商品
-        //List<String> totalCategory = countCategory.stream().distinct().collect(Collectors.toList());
         List<String> totalCategory = new ArrayList();
         for (int i = 0; i < countCategory.size(); i++) {
             if (!totalCategory.contains(countCategory.get(i))) {
