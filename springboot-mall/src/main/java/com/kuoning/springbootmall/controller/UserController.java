@@ -4,6 +4,7 @@ import com.kuoning.springbootmall.dto.UserLoginRequest;
 import com.kuoning.springbootmall.dto.UserRegisterRequest;
 import com.kuoning.springbootmall.model.User;
 import com.kuoning.springbootmall.service.UserService;
+import com.kuoning.springbootmall.util.JwtToken;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,12 @@ public class UserController {
 
     @ApiOperation("使用者登入")
     @PostMapping("/users/login")
-    public ResponseEntity<User> login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
+    public ResponseEntity<String> login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
         User user = userService.login(userLoginRequest);
 
-        return ResponseEntity.status(HttpStatus.OK).body(user);
+        JwtToken jwtToken = new JwtToken();
+        String token = jwtToken.generateToken(userLoginRequest); // 取得token
+
+        return ResponseEntity.status(HttpStatus.OK).body(token);
     }
 }
