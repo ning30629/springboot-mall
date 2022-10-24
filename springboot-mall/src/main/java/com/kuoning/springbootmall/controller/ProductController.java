@@ -5,6 +5,7 @@ import com.kuoning.springbootmall.dto.ProductQueryParams;
 import com.kuoning.springbootmall.dto.ProductRequest;
 import com.kuoning.springbootmall.model.Product;
 import com.kuoning.springbootmall.service.ProductService;
+import com.kuoning.springbootmall.util.JwtToken;
 import com.kuoning.springbootmall.util.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.security.auth.message.AuthException;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -80,7 +82,19 @@ public class ProductController {
 
     @ApiOperation("創建商品")
     @PostMapping("/products")
-    public ResponseEntity<Product> createProduct(@RequestBody @Valid ProductRequest productRequest) {
+    public ResponseEntity<?> createProduct(
+            @RequestHeader("Authorization") String au,
+            @RequestBody @Valid ProductRequest productRequest) {
+
+        //驗證token
+        String token = au.substring(6);
+        JwtToken jwtToken = new JwtToken();
+        try {
+            jwtToken.validateToken(token);
+        } catch (AuthException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+        }
+
         Integer productId = productService.createProduct(productRequest);
 
         Product product  = productService.getProductById(productId);
@@ -90,9 +104,20 @@ public class ProductController {
 
     @ApiOperation("更新商品")
     @PutMapping("/products/{productId}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Integer productId,
-                                                 @RequestBody @Valid ProductRequest productRequest){
-                                                //因為在ProductRequest中的參數都是允許前端修改的，所以這邊可以直接沿用
+    public ResponseEntity<?> updateProduct(
+            @RequestHeader("Authorization") String au,
+            @PathVariable Integer productId,
+            @RequestBody @Valid ProductRequest productRequest){
+
+        //驗證token
+        String token = au.substring(6);
+        JwtToken jwtToken = new JwtToken();
+        try {
+            jwtToken.validateToken(token);
+        } catch (AuthException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+        }
+
         //檢查product是否存在
         Product product = productService.getProductById(productId);
 
@@ -111,7 +136,19 @@ public class ProductController {
 
     @ApiOperation("刪除商品")
     @DeleteMapping("/products/{productId}")
-    public ResponseEntity<?> deleteProduct(@PathVariable Integer productId) {
+    public ResponseEntity<?> deleteProduct(
+            @RequestHeader("Authorization") String au,
+            @PathVariable Integer productId) {
+
+        //驗證token
+        String token = au.substring(6);
+        JwtToken jwtToken = new JwtToken();
+        try {
+            jwtToken.validateToken(token);
+        } catch (AuthException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
+        }
+
         productService.deleteProductById(productId);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
