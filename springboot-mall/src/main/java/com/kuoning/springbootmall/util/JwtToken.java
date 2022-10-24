@@ -18,8 +18,6 @@ public class JwtToken implements Serializable {
     private static final String SECRET = "secret key of spring boot mall";
 
     public String generateToken(UserLoginRequest userLoginRequest) {
-//        UserLoginRequest userLoginRequest;
-//        userDetails = userLoginRequest.getEmail();
         Map<String, Object> claims = new HashMap<>();
         claims.put( "userLoginRequest", userLoginRequest);
 
